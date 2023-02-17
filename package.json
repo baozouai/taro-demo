@@ -9,39 +9,93 @@
     "css": "less"
   },
   "scripts": {
-    "build:weapp": "taro build --type weapp",
-    "start": "npm run build:weapp -- --watch"
+    "start": "npm run build -- --watch --minimize",
+    "build": "taro build --type weapp",
+    "build:analysis": "node ./scripts/build_analysis.js",
+    "dev:weapp": "npm run build -- --watch --minimize",
+    "api": "node ./node_modules/gm_api_script/scripts/update_gm_api.js; pnpm install",
+    "svg": "rm -rf fonts; node svg2font.js;",
+    "start_with_env": "node ./scripts/start_with_env.js",
+    "start:master": "pnpm start_with_env master",
+    "start:dev": "pnpm start_with_env dev",
+    "start:lite": "pnpm start_with_env lite",
+    "start:feature": "pnpm start_with_env feature",
+    "preinstall": "node ./scripts/check_pnpm.js",
+    "build:lite": "node ./scripts/build_with_env.js lite",
+    "build:feature": "node ./scripts/build_with_env.js feature",
+    "prepare": "husky install"
   },
-  "browserslist": [
-    "last 3 versions",
-    "Android >= 4.1",
-    "ios >= 8"
-  ],
-  "author": "",
-  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "lint-staged": {
+    "./src/**/*.{ts,tsx,js}": [
+      "eslint --cache --fix"
+    ],
+    "./packages/**/*.less": [
+      "stylelint --cache --fix"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "iOS >= 8",
+      "Android >= 5.0"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@gm-react-app/commitlint-gm-react-app"
+    ]
+  },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "@gm-common/hooks": "^2.9.10",
+    "@gm-common/image": "^2.4.1",
+    "@gm-common/mobx": "^2.9.10",
+    "@gm-mobile/c-font": "3.10.3",
+    "@gm-mobile/c-tool": "3.10.3",
+    "@gm-mobile/mp": "3.10.3",
+    "@gm-mobile/mp-request": "3.10.3",
     "@tarojs/components": "3.6.1",
     "@tarojs/helper": "3.6.1",
     "@tarojs/plugin-framework-react": "3.6.1",
+    "@tarojs/plugin-platform-weapp": "^3.6.1",
     "@tarojs/react": "3.6.1",
     "@tarojs/runtime": "3.6.1",
     "@tarojs/shared": "3.6.1",
     "@tarojs/taro": "3.6.1",
-    "mobx": "^4.8.0",
+    "big.js": "^5.2.2",
+    "classnames": "^2.2.6",
+    "dayjs": "^1.11.2",
+    "gm-i18n": "^2.2.3",
+    "gm_api": "git+https://code.guanmai.cn/fe-x/gm_api.git#6d19daf32ac573a6502ff4d89c3470fdf929eacb",
+    "mobx": "^6.8.0",
     "mobx-react": "^6.1.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "zustand": "^4.3.3"
+    "taro-axios": "^1.1.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
     "@babel/core": "^7.8.0",
+    "@gm-react-app/commitlint-gm-react-app": "3.6.2-beta.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
     "@tarojs/cli": "3.6.1",
     "@tarojs/webpack5-runner": "3.6.1",
     "@types/react": "^18.0.0",
     "@types/webpack-env": "^1.13.6",
+    "@types/wechat-miniprogram": "^3.1.0",
     "babel-preset-taro": "3.6.1",
     "eslint": "^8.34.0",
     "eslint-config-taro": "3.6.1",
@@ -49,11 +103,14 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^1.6.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
     "postcss": "^8.4.18",
     "react-refresh": "^0.11.0",
     "stylelint": "9.3.0",
     "ts-config-gm-react-app": "^5.0.0",
     "typescript": "^4.9.5",
-    "webpack": "5.69.0"
+    "webpack": "5.69.0",
+    "webpack-bundle-analyzer": "^4.3.0"
   }
 }

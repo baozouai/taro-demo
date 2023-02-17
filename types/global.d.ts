@@ -1,8 +1,5 @@
 /// <reference types="@tarojs/taro" />
 
-import * as React from 'react';
-
-
 declare module '*.png';
 declare module '*.gif';
 declare module '*.jpg';
@@ -20,14 +17,9 @@ declare namespace JSX {
     }
 }
 
-declare namespace NodeJS {
-  interface ProcessEnv {
-    TARO_ENV: 'weapp' | 'swan' | 'alipay' | 'h5' | 'rn' | 'tt' | 'quickapp' | 'qq' | 'jd'
-  }
-}
-
-declare module 'react' {
-  interface FunctionComponent<P = {}> {
-    (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
-  }
-}
+// declare module 'react' {
+//   interface FunctionComponent<P = {}> {
+//     (props: React.PropsWithChildren<P>, context?: any): React.ReactElement<any, any> | null;
+//   }
+// }
+declare type FC<P = {}> = React.FC<React.PropsWithChildren<P>>;
