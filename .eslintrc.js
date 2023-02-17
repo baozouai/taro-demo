@@ -17,5 +17,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     'promise/always-return': 'off',
     'react/react-in-jsx-scope': 'off',
+    'unused-imports/no-unused-imports': 'warn',
   },
 }

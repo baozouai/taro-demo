@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "dist/",
-  "projectname": "gm_boss_assistant",
+  "projectname": "gm_mp_boss_assistant",
   "description": "老板助手",
   "appid": "wx9273d908f84a6949",
   "setting": {

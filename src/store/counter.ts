@@ -1,9 +1,18 @@
-import { create } from 'zustand'
+import { makeAutoObservable } from 'mobx'
 
-const useBearStore = create((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
-} as const))
+class Store {
+  bears = 0
+  constructor() {
+    makeAutoObservable(this, undefined, { autoBind: true })
+  }
 
-export default useBearStore
+  increasePopulation() {
+    this.bears++
+  }
+
+  removeAllBears() {
+    this.bears = 0
+  }
+}
+
+export default new Store()
