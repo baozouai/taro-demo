@@ -1,0 +1,14 @@
+{
+  "extends": "ts-config-gm-react-app/tsconfig",
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx",
+    "module": "commonjs",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@gm-common/x-request": ["node_modules/@gm-mobile/mp-request"]
+    },
+  },
+  "include": ["src/**/*", "./types/global.d.ts", "./node_modules/gm_api/src/**/*"]
+}
